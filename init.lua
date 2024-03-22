@@ -846,6 +846,7 @@ require('lazy').setup({
         filters = {
           dotfiles = true,
         },
+        vim.keymap.set('n', '<leader>ee', ':NvimTreeToggle<CR>', { silent = true }),
       }
     end,
   },
