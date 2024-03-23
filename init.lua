@@ -233,6 +233,8 @@ vim.opt.rtp:prepend(lazypath)
 --
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
+
+  --spec = { { import = 'lua.custom.plugins.copilot-chat' } },
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
@@ -856,9 +858,11 @@ require('lazy').setup({
     keys = {
       { '<leader>td', '<cmd>ToggleTerm size=10 direction=horizontal<cr>', desc = 'Open a horizontal terminal at the Desktop directory' },
     },
-    opts = { --[[ things you want to change go here ]]
+    opts = {
+      --[[ things you want to change go here ]]
     },
   },
+
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
@@ -877,7 +881,7 @@ require('lazy').setup({
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
-  -- { import = 'custom.plugins' },
+ { import = 'custom.plugins' },
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
