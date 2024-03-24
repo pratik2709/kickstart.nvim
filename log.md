@@ -10,3 +10,9 @@
 
 
 - install lazygit with toggleterm
+
+space + lg: lazygit
+space + sf: search files
+space + b: togglediffviewpanel
+:DiffviewOpen
+:DiffviewClose
