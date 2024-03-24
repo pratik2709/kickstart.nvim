@@ -16,3 +16,7 @@ space + sf: search files
 space + b: togglediffviewpanel
 :DiffviewOpen
 :DiffviewClose
+
+https://github.com/sindrets/diffview.nvim
+
+
