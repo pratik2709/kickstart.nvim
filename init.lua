@@ -577,6 +577,7 @@ require('lazy').setup({
         },
 
         rust_analyzer = {},
+        sourcekit = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -593,6 +594,11 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
       })
+
+      ensure_installed = vim.tbl_filter(function(server)
+        return server ~= 'sourcekit'
+      end, ensure_installed)
+
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
       require('mason-lspconfig').setup {
