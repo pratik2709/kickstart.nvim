@@ -117,5 +117,5 @@ how to reverse search
 ? <search term>
 Use n to move back
 
-
-
+Goto line number:
+:42
