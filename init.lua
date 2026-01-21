@@ -296,6 +296,9 @@ require('lazy').setup({
         topdelete = { text = '‾' },
         changedelete = { text = '~' },
       },
+      on_attach = function(bufnr)
+        vim.keymap.set('n', '<leader>gb', require('gitsigns').blame_line, { buffer = bufnr, desc = '[G]it [B]lame' })
+      end,
     },
   },
 
@@ -687,7 +690,7 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = {},
+        gopls = {}, -- Go
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -697,7 +700,11 @@ require('lazy').setup({
         --
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         ts_ls = {}, -- TypeScript/JavaScript
-        eslint = {}, -- Linting
+        eslint = { -- Linting
+          settings = {
+            useFlatConfig = true, -- Support for ESLint 9 flat config
+          },
+        },
         cssls = {}, -- CSS/SCSS
         jsonls = {}, -- JSON files
 
@@ -976,7 +983,7 @@ require('lazy').setup({
     config = function()
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
       require('nvim-treesitter').setup {
-        ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'wgsl_bevy', 'typescript', 'tsx', 'javascript', 'json', 'css' },
+        ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'wgsl_bevy', 'typescript', 'tsx', 'javascript', 'json', 'css', 'go', 'gomod', 'gosum' },
         auto_install = true,
       }
 

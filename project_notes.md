@@ -101,7 +101,7 @@ cltr + y
 
 
 Import package:
-Leader + ca
+gra
 
 Reload buffer:
 :e!

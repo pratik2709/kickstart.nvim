@@ -25,6 +25,7 @@ return {
     dependencies = {
       { 'nvim-telescope/telescope.nvim' }, -- Use telescope for help actions
       { 'nvim-lua/plenary.nvim' },
+      { 'zbirenbaum/copilot.lua' }, -- Required for authentication
     },
     opts = {
       prompts = prompts,
@@ -88,7 +89,12 @@ return {
         end,
       }
 
-      chat.setup(opts)
+      -- Wrap setup in pcall to handle missing Copilot authentication gracefully
+      local ok, err = pcall(chat.setup, opts)
+      if not ok then
+        vim.notify('CopilotChat: Run :Copilot auth to authenticate first\n' .. tostring(err), vim.log.levels.WARN)
+        return
+      end
 
       vim.api.nvim_create_user_command('CopilotChatVisual', function(args)
         chat.ask(args.args, { selection = select.visual })
