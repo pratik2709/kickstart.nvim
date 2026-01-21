@@ -119,3 +119,13 @@ Use n to move back
 
 Goto line number:
 :42
+
+(requires gh installed)
+Get PRs:
+op
+
+Open PR and then do od - to open in diff view
+
+Diffview:
+zo - open under cursoe 
+zc - close under cursor
