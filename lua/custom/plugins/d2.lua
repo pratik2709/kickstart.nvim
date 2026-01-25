@@ -10,5 +10,12 @@ return {
     vim.g.d2_fmt_autosave = 1
     -- Set preview window width to half screen
     vim.g.d2_ascii_preview_width = vim.o.columns / 2
+    
+    -- Custom keybindings
+    -- Normal mode: preview current buffer (for .d2 files)
+    vim.keymap.set('n', '<leader>dp', ':D2Preview<CR>', { desc = 'D2 Preview', silent = true })
+    
+    -- Visual mode: preview selected text (works in any file)
+    vim.keymap.set('v', '<leader>dp', ':D2PreviewSelection<CR>', { desc = 'D2 Preview Selection', silent = true })
   end,
 }
