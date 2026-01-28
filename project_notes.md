@@ -129,3 +129,9 @@ Open PR and then do od - to open in diff view
 Diffview:
 zo - open under cursoe 
 zc - close under cursor
+
+Ghostty:
+cmd + shift + D
+cmd + D
+Switch between panes: cmd + option + arrow
+
