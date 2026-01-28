@@ -742,7 +742,7 @@ require('lazy').setup({
       -- for you, so that they are available from within Neovim.
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
-        'stylua', -- Used to format Lua code
+        -- 'stylua', -- Used to format Lua code (disabled)
       })
 
       ensure_installed = vim.tbl_filter(function(server)
@@ -799,7 +799,7 @@ require('lazy').setup({
         end
       end,
       formatters_by_ft = {
-        lua = { 'stylua' },
+        -- lua = { 'stylua' }, -- disabled
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --
