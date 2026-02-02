@@ -543,6 +543,12 @@ require('lazy').setup({
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
+          -- Skip non-file buffers (like diffview://, fugitive://, etc.)
+          local uri = vim.uri_from_bufnr(event.buf)
+          if uri and not vim.startswith(uri, 'file://') then
+            return
+          end
+
           -- NOTE: Remember that Lua is a real programming language, and as such it is possible
           -- to define small helper and utility functions so you don't have to repeat yourself.
           --
