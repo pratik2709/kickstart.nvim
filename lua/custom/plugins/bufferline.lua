@@ -9,6 +9,27 @@ return {
     { '<leader>bl', '<cmd>BufferLineMoveNext<cr>', desc = 'Move Buffer Right' },
     { '<leader>bh', '<cmd>BufferLineMovePrev<cr>', desc = 'Move Buffer Left' },
     { '<leader>bp', '<cmd>BufferLinePick<cr>', desc = 'Buffer Pick' },
+    { '<leader>bd', '<cmd>BufferLinePickClose<cr>', desc = '[B]uffer [D]elete (Pick)' },
+    { '<leader>bc', '<cmd>BufferLineCloseOthers<cr>', desc = '[B]uffer [C]lose Others' },
+    { '<leader>bx', function()
+      local buf = vim.api.nvim_get_current_buf()
+      local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+      
+      -- If this is the last buffer, just delete it
+      if #buffers <= 1 then
+        vim.cmd('bdelete')
+        return
+      end
+      
+      -- Try to go to next buffer, fallback to previous
+      local ok = pcall(vim.cmd, 'BufferLineCycleNext')
+      if not ok then
+        pcall(vim.cmd, 'BufferLineCyclePrev')
+      end
+      
+      -- Delete the original buffer
+      vim.cmd('bdelete ' .. buf)
+    end, desc = 'Close Current Buffer' },
   },
   opts = {
     options = {
