@@ -135,3 +135,4 @@ cmd + shift + D
 cmd + D
 Switch between panes: cmd + option + arrow
 
+H : for toggling .files on and off in the tree
