@@ -136,3 +136,15 @@ cmd + D
 Switch between panes: cmd + option + arrow
 
 H : for toggling .files on and off in the tree
+:split horizontal splitting
+
+  • `<C-w>-` — decrease height
+  • `<C-w>+` — increase height
+  • `<C-w><` — decrease width
+  • `<C-w>>` — increase width
+  • `<C-w>=` — equalize all split sizes
+
+  You can also prefix with a count, e.g. `5<C-w>-` to decrease by 5 rows at once.
+
+
+  NvimTreeOpen
