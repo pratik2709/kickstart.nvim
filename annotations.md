@@ -13,7 +13,7 @@
 ### Line 3
 
 ```lua
-  opts = {},
+  config = function()
 ```
 
 > second one
