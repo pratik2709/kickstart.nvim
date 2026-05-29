@@ -24,9 +24,8 @@ return {
       width = 'block',
       right_pad = 1,
     },
-    -- Reveal raw markdown on the cursor line
     anti_conceal = {
-      enabled = true,
+      enabled = false,
     },
   },
 }
