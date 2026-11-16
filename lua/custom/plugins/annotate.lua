@@ -1,7 +1,15 @@
 return {
-  'jacobb/annotate.nvim',
+  -- Private fork of jacobb/annotate.nvim with extmark-based tracking.
+  url = 'git@github.com:pratik2709/code-annotate.git',
+  name = 'annotate.nvim',
+  branch = 'feat/extmark-tracking',
   config = function()
-    require('annotate').setup {}
+    require('annotate').setup { auto_export = true }
+
+    -- Reload files changed on disk (e.g. by an agent) so annotations re-anchor.
+    vim.api.nvim_create_autocmd({ 'FocusGained', 'BufEnter', 'CursorHold', 'CursorHoldI' }, {
+      command = "if mode() != 'c' | checktime | endif",
+    })
 
     local annotation_width = 0.8
     local annotation_height = 15
@@ -27,14 +35,5 @@ return {
         })
       end,
     })
-
-    local store = require 'annotate.store'
-    local export = require 'annotate.export'
-    local original_save = store.save
-
-    store.save = function(...)
-      original_save(...)
-      export.export()
-    end
   end,
 }

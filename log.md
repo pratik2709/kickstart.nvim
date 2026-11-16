@@ -11,6 +11,8 @@
 
 - install lazygit with toggleterm
 
+hello
+world
 space + lg: lazygit
 space + sf: search files
 space + b: togglediffviewpanel

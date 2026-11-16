@@ -5,7 +5,7 @@
 ### Line 2
 
 ```lua
-  'jacobb/annotate.nvim',
+  -- Private fork of jacobb/annotate.nvim with extmark-based tracking.
 ```
 
 > my first annotation
@@ -13,7 +13,17 @@
 ### Line 3
 
 ```lua
-  config = function()
+  url = 'git@github.com:pratik2709/code-annotate.git',
 ```
 
 > second one
+
+## log.md
+
+### Line 16
+
+```markdown
+space + lg: lazygit
+```
+
+> shortcuts
