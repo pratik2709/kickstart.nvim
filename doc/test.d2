@@ -1,0 +1,26 @@
+# Simple D2 diagram test
+x -> y: hello world
+
+# Shapes
+server: Web Server {
+  shape: rectangle
+}
+
+database: Database {
+  shape: cylinder
+}
+
+user: User {
+  shape: person
+}
+
+# Connections
+user -> server: HTTP Request
+server -> database: Query
+database -> server: Results
+server -> user: Response
+
+# Styles
+server.style.fill: "#FFD700"
+database.style.fill: "#87CEEB"
+user.style.fill: "#90EE90"

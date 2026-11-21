@@ -1,0 +1,6 @@
+* TODO Finish the project
+  :LOGBOOK:
+  CLOCK: [2026-11-22 Sun 11:08]--[2026-11-22 Sun 11:08] => 0:00
+  :END:
+* TODO Review the changes
+* DONE Set up Orgmode
