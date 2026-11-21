@@ -8,5 +8,7 @@ return {
     require('orgmode').setup {
       org_agenda_files = { project_root .. '/**/*.org' },
     }
+
+    require('custom.org_countdown').setup()
   end,
 }
