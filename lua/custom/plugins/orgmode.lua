@@ -10,5 +10,6 @@ return {
     }
 
     require('custom.org_countdown').setup()
+    require('custom.org_clock_words').setup()
   end,
 }
