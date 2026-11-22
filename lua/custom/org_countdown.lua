@@ -10,6 +10,22 @@ local default_minutes = 25
 ---@type { buf: integer, mark: integer, ends_at: integer, title: string, notified: boolean, timer: uv.uv_timer_t }|nil
 local active = nil
 
+-- Read by the SwiftBar menu bar plugin: lines are ends_at, nvim pid, title.
+local state_file = vim.fs.joinpath(vim.env.HOME, '.cache', 'org-countdown')
+
+local function write_state()
+  vim.fn.mkdir(vim.fs.dirname(state_file), 'p')
+  vim.fn.writefile({ tostring(active.ends_at), tostring(vim.fn.getpid()), active.title }, state_file)
+end
+
+--- Removes the state file unless another Neovim instance owns it.
+local function clear_state()
+  local lines = vim.fn.filereadable(state_file) == 1 and vim.fn.readfile(state_file) or {}
+  if lines[2] == tostring(vim.fn.getpid()) then
+    os.remove(state_file)
+  end
+end
+
 vim.api.nvim_set_hl(0, 'OrgCountdown', { default = true, link = 'DiagnosticInfo' })
 vim.api.nvim_set_hl(0, 'OrgCountdownLow', { default = true, link = 'DiagnosticWarn' })
 vim.api.nvim_set_hl(0, 'OrgCountdownOver', { default = true, link = 'DiagnosticError' })
@@ -103,6 +119,7 @@ function M.stop(opts)
   active = nil
   stopped.timer:stop()
   stopped.timer:close()
+  clear_state()
   if vim.api.nvim_buf_is_valid(stopped.buf) then
     vim.api.nvim_buf_del_extmark(stopped.buf, ns, stopped.mark)
     if (opts or {}).clock_out ~= false then
@@ -123,6 +140,7 @@ local function start_on_heading(row, title, secs)
     notified = false,
     timer = vim.uv.new_timer(),
   }
+  write_state()
   active.timer:start(0, 1000, vim.schedule_wrap(render))
 end
 
@@ -204,6 +222,8 @@ function M.setup()
       set_keymaps(ev.buf)
     end,
   })
+  vim.api.nvim_create_autocmd('VimLeavePre', { callback = clear_state })
+
   -- orgmode loads on VeryLazy, so org buffers opened at startup already exist.
   for _, buf in ipairs(vim.api.nvim_list_bufs()) do
     if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].filetype == 'org' then
